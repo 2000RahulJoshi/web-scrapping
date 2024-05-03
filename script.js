@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer';
-const browser = await puppeteer.launch({headless: false,defaultViewport: null});
+// const browser = await puppeteer.launch({headless: false,defaultViewport: null});
+const browser = await puppeteer.launch({headless: false,slowMo:50});
+
 const page = await browser.newPage();
 let companyDataObject = [];
  
@@ -10,7 +12,7 @@ let companyDataObject = [];
         '--incognito',
       ],
   });
-  // await page.setViewport({width: 1080, height: 1024});
+  await page.setViewport({width: 1080, height: 1024});
   // const browser = await puppeteer.launch({defaultViewport: null});
   await page.waitForSelector('#session_key');
   await page.type('#session_key', 'materialstudy6969@gmail.com');
@@ -100,7 +102,7 @@ let companyDataObject = [];
 async function filterValues(labelName,labelValue){
   // let locationInput = await page.waitForSelector('input[aria-label = "Add a location"]')
   let locationInput = await page.waitForSelector(`input[aria-label = '${labelName}']`)
-  await locationInput.type(`${labelValue}`,{delay : 400})
+  await locationInput.type(`${labelValue}`)
 
   let locationDiv = await page.evaluate((val)=> val.getAttribute('aria-controls'),locationInput);
   await page.waitForSelector(`#${locationDiv}`);
@@ -120,11 +122,15 @@ async function filterValues(labelName,labelValue){
 async function openCompanyPages(companyCount){
   console.log('companycount--->',companyCount)
     await page.waitForSelector('.reusable-search__result-container');
+    // console.log("in1")
     let companiesList = await page.$$('.reusable-search__result-container');
+    // console.log("in2")
     await page.waitForSelector('button[aria-label="Next"]')
+    // console.log("in3")
     let nextBtn = await page.$('button[aria-label="Next"]')
+    // console.log("in4")
     let isNextBtnDisabled = await page.evaluate( (val)=> val.disabled,nextBtn)
-    console.log('companiesList--->',companiesList.length)
+    // console.log('companiesList--->',companiesList.length)
     
     for(let i=0;i<companiesList.length;i++){
       let page1;
@@ -161,6 +167,6 @@ async function openCompanyPages(companyCount){
     await page.waitForNavigation()
     await openCompanyPages(companyCount);
   }
-  console.log(companyCount);
+  // console.log(companyCount);
 }
 
