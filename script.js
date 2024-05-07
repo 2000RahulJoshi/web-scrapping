@@ -101,9 +101,9 @@ let countryName = "dubai";
   await openCompanyPages(0);
 
   // to convert the object into excel sheet
-  var newWB = xlsx.utils.book_new();
-  var newWS = xlsx.utils.json_to_sheet(companyDataObject);
-  xlsx.utils.book_append_sheet(newWB, newWS, "name");
+  var newWB = xlsx.utils.book_new();    //create a new excel workbook object
+  var newWS = xlsx.utils.json_to_sheet(companyDataObject);    //convert data into excel workbook object
+  xlsx.utils.book_append_sheet(newWB, newWS, "name");   //to append json data into excel sheet
   xlsx.writeFile(newWB, `${countryName}.xlsx`);
   await browser.close();
 
@@ -114,7 +114,7 @@ let countryName = "dubai";
       console.error('Error writing file:', err);
       return;
     }
-    console.log('Data has been written to data.json');
+    console.log(`Data has been written to ${countryName}.json`);
   });
 })();
 
@@ -216,7 +216,7 @@ async function openCompanyPages(companyCount) {
       console.log(error);
     }
   }
-  if (!isNextBtnDisabled && companyCount < 30) {
+  if (!isNextBtnDisabled && companyCount < 10) {
     await nextBtn.click();
     await page.waitForNavigation();
     await openCompanyPages(companyCount);
