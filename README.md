@@ -8,7 +8,7 @@ This project aims to collect a list of companies from LinkedIn using web scrapin
  
 1:- Node (to check run node -v)
 
-2:- Puppetter
+2:- Puppeteer
 
 
 # Clone this repositery in your local machine
@@ -24,7 +24,7 @@ git clone https://github.com/2000RahulJoshi/web-scrapping.git
 2:- Run the following commands:-
 
     node init -y
-    npm -i puppeter
+    npm -i puppeteer
     npm -i fs
     npm -i dotenv
     npm -i xlsx
