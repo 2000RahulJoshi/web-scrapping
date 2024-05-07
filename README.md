@@ -23,7 +23,7 @@ git clone https://github.com/2000RahulJoshi/web-scrapping.git
 
 2:- Run the following commands:-
 
-    node init -y
+    npm init -y
     npm -i puppeteer
     npm -i fs
     npm -i dotenv
