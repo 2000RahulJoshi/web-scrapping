@@ -1,6 +1,8 @@
 import puppeteer from "puppeteer";
 import xlsx from "xlsx";
 import fs from "fs";
+import dotenv from "dotenv"
+dotenv.config({path:"./credentials.env"})
 
 // const browser = await puppeteer.launch({headless: false,defaultViewport: null});
 const browser = await puppeteer.launch({ headless: false, slowMo: 40 });
@@ -15,10 +17,10 @@ let countryName = "dubai";
   await page.setViewport({ width: 1366, height: 1024 });
   // user email id 
   await page.waitForSelector("#session_key");
-  await page.type("#session_key", "materialstudy6969@gmail.com");
+  await page.type("#session_key", process.env.USER);
   //user password 
   await page.waitForSelector("#session_password");
-  await page.type("#session_password", "Rahul@123");
+  await page.type("#session_password", process.env.PASSWORD);
   await page.keyboard.press("Enter");
 
   await page.waitForNavigation();
